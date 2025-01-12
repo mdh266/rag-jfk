@@ -7,7 +7,7 @@ from google.oauth2 import service_account
 from google.cloud import storage
 from google.cloud.exceptions import Conflict
 import re
-
+# python extract.py  38.57s user 1.47s system 6% cpu 9:37.97 total
 
 async def get_soup(address: str, num: int = None) -> str:
     if num is not None:
@@ -21,7 +21,7 @@ async def get_soup(address: str, num: int = None) -> str:
 
 async def get_links():
     address = "https://www.jfklibrary.org/archives/other-resources/john-f-kennedy-speeches"
-    page_nbs = range(1,18)
+    page_nbs = range(1,33)
 
     links = []
     for num in page_nbs:

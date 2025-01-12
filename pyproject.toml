@@ -1,0 +1,11 @@
+[project]
+name = "rag-jfk"
+version = "0.1.0"
+description = "Retrivial Augmented Generation With JFK Speeches"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "asyncio>=3.4.3",
+    "beautifulsoup4>=4.12.3",
+    "google-cloud-storage>=2.19.0",
+]
