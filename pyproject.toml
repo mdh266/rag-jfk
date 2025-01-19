@@ -8,4 +8,10 @@ dependencies = [
     "asyncio>=3.4.3",
     "beautifulsoup4>=4.12.3",
     "google-cloud-storage>=2.19.0",
+    "jq>=1.8.0",
+    "langchain>=0.3.14",
+    "langchain-community>=0.3.14",
+    "langchain-core>=0.3.30",
+    "langchain-openai>=0.3.1",
+    "langchain-pinecone>=0.2.2",
 ]
