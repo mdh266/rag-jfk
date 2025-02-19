@@ -7,7 +7,10 @@ from google.oauth2 import service_account
 from google.cloud import storage
 from google.cloud.exceptions import Conflict
 import re
+##################################################################
 # python extract.py  38.57s user 1.47s system 6% cpu 9:37.97 total
+##################################################################
+
 
 async def get_soup(address: str, num: int = None) -> str:
     if num is not None:
@@ -117,7 +120,7 @@ async def main():
             await load(bucket, link)
             files.append(get_name(link))
         except Exception as e:
-            with open("uplaoded_files.json", "w") as f:
+            with open("uploaded_files.json", "w") as f:
                 f.write(json.dumps({"uploaded": files,
                                     "exception": e}))
                 
