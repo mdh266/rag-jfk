@@ -169,4 +169,10 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+uv.lock
+
+# Data + credentials
 credentials.json
+chroma_langchain_db
+*json
+
