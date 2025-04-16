@@ -23,5 +23,8 @@ if st.button("Submit"):
     st.markdown("---")
     st.markdown("#### Sources:")
 
-    for num, doc in enumerate(response["context"]):
+    # TODO: Deduplicate the results
+    speeches = response["context"]
+    for num, doc in enumerate(speeches):
         st.markdown(f"{num+1}. [{doc.metadata['title']}]({doc.metadata['url']})")
+        
