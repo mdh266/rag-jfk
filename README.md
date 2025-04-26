@@ -14,7 +14,7 @@ In this post I will expand upon this work and build out a [Retrivial Augmented G
 
 
 <center>
-<img src="images/ragui.png" 
+<img src="notebooks/images/ragui.png" 
      width="600" 
      height="600"
      class="center" />
