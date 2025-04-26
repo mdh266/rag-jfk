@@ -10,4 +10,13 @@ The first blog post I cover how I collected speeches as well as their metadata u
 
 ## Part 2:
 ------------
-In this post I will expand upon this work and build out a [Retrivial Augmented Generation (RAG)](https://en.wikipedia.org/wiki/Retrieval-augmented_generation) pipeline using [LangChain](https://www.langchain.com/). I first cover how RAG pipeliens work and how to use the [Pinecone Vector Database](https://pinecone.io/) as a retriever to generate documents related to a users question. Then I go over how to use the LLM and the retrieved documents to generate an answer to the question. Lastly, I cover howt deploy this as a [Streamlit](https://streamlit.io/) application to be able to answer questions on President Kennedy.
+In this post I will expand upon this work and build out a [Retrivial Augmented Generation (RAG)](https://en.wikipedia.org/wiki/Retrieval-augmented_generation) pipeline using [LangChain](https://www.langchain.com/). I first cover how RAG pipeliens work and how to use the [Pinecone Vector Database](https://pinecone.io/) as a retriever to generate documents related to a users question. Then I go over how to use the LLM and the retrieved documents to generate an answer to the question. Lastly, I cover how deploy this as a [Streamlit](https://streamlit.io/) application to be able to answer questions on President Kennedy. An example of what this application looks like is below,
+
+
+<center>
+<img src="images/ragui.png" 
+     width="600" 
+     height="600"
+     class="center" />
+</center>
+

@@ -8,10 +8,6 @@ from langchain.prompts import PromptTemplate
 import os
 from typing import Dict, Any
 
-# API Keys
-from dotenv import load_dotenv
-load_dotenv()
-
 
 def ask_question(question: str, index_name: str) -> Dict[str, Any]:
 
