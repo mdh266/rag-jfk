@@ -13,7 +13,6 @@ question = st.text_input(
     "Enter your question here", "How did Kennedy feel about the Soviet Union?"
 )
 
-
 if st.button("Submit"):
     index_name = "prez-speeches"
 
