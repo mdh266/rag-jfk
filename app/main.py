@@ -9,8 +9,9 @@ for LLM based texxt generation. The front end is built using [Streamlit](https:/
 """)
 
 
-question = st.text_input("Enter your question here", 
-                         "How did Kennedy feel about the Soviet Union?")
+question = st.text_input(
+    "Enter your question here", "How did Kennedy feel about the Soviet Union?"
+)
 
 
 if st.button("Submit"):
@@ -27,5 +28,4 @@ if st.button("Submit"):
     # TODO: Deduplicate the results
     speeches = response["context"]
     for num, doc in enumerate(speeches):
-        st.markdown(f"{num+1}. [{doc.metadata['title']}]({doc.metadata['url']})")
-        
+        st.markdown(f"{num + 1}. [{doc.metadata['title']}]({doc.metadata['url']})")
