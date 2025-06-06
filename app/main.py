@@ -1,30 +1,52 @@
 import streamlit as st
 from rag import ask_question
 
-st.markdown("""# RAG On JFK
-This app uses [LangChain](https://www.langchain.com/) to retrieve and generate answers to questions about
-[John F. Kennedy's speeches](https://www.jfklibrary.org/archives/other-resources/john-f-kennedy-speeches). 
-It uses a combination of [Pinecone](https://pinecone.io/) for vector storage and [OpenAI](https://openai.com/) 
-for LLM based texxt generation. The front end is built using [Streamlit](https://streamlit.io/).
-""")
 
-
-question = st.text_input(
-    "Enter your question here", "How did Kennedy feel about the Soviet Union?"
+st.set_page_config(
+    page_title="RAG-JFK",
+    page_icon=":eagle:",
 )
 
-if st.button("Submit"):
-    index_name = "prez-speeches"
+with st.sidebar:
+    st.page_link("https://michael-harmon.com/blog/ragjfk1.html", label="Speeches & Data", icon="📊")
+    st.page_link("https://michael-harmon.com/blog/ragjfk2.html", label="About RAG", icon="🤖")
+    st.page_link("https://github.com/mdh266/rag-jfk", label="GitHub Rep", icon="🧑‍💻")
 
-    with st.spinner("Ask not...", show_time=True):
-        response = ask_question(question=question, index_name=index_name)
 
-    st.markdown("#### Answer:")
-    st.markdown(f"{response['answer']}")
-    st.markdown("---")
-    st.markdown("#### Sources:")
+def main(debug: bool = False):
+    if debug:
+        from dotenv import load_dotenv
+        load_dotenv()
 
-    # TODO: Deduplicate the results
-    speeches = response["context"]
-    for num, doc in enumerate(speeches):
-        st.markdown(f"{num + 1}. [{doc.metadata['title']}]({doc.metadata['url']})")
+    st.markdown("""
+    # :eagle: RAG On JFK 
+    This app uses [LangChain](https://www.langchain.com/) to retrieve and generate answers to questions about
+    [John F. Kennedy's speeches](https://www.jfklibrary.org/archives/other-resources/john-f-kennedy-speeches). 
+    It uses a combination of [Pinecone](https://pinecone.io/) for vector storage and [OpenAI](https://openai.com/) 
+    for LLM based texxt generation. The front end is built using [Streamlit](https://streamlit.io/).
+    """)
+
+
+    question = st.text_input(
+        "Enter your question here", "How did Kennedy feel about the Soviet Union?"
+    )
+
+    if st.button("Submit"):
+        index_name = "prez-speeches"
+
+        with st.spinner("Ask not...", show_time=True):
+            response = ask_question(question=question, index_name=index_name)
+
+        st.markdown("#### Answer:")
+        st.markdown(f"{response['answer']}")
+        st.markdown("---")
+        st.markdown("#### Sources:")
+
+        # TODO: Deduplicate the results
+        speeches = response["context"]
+        for num, doc in enumerate(speeches):
+            st.markdown(f"{num + 1}. [{doc.metadata['title']}]({doc.metadata['url']})")
+
+
+if __name__ == "__main__":
+    main(debug=True)
