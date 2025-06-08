@@ -9,4 +9,4 @@ COPY entrypoint.sh /work
 RUN chmod +x /work/entrypoint.sh 
 RUN pip install . --no-cache 
 
-ENTRYPOINT ["/work/entrypoint.sh"]
+ENTRYPOINT ["/work/entrypoint.sh"] 
