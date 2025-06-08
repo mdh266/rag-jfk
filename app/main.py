@@ -19,7 +19,7 @@ def main(debug: bool = False):
         load_dotenv()
 
     st.markdown("""
-    # :eagle: RAG On JFK 
+    # :eagle: RAG On JFK Speeches
     This app uses [LangChain](https://www.langchain.com/) to retrieve and generate answers to questions about
     [John F. Kennedy's speeches](https://www.jfklibrary.org/archives/other-resources/john-f-kennedy-speeches). 
     It uses a combination of [Pinecone](https://pinecone.io/) for vector storage and [OpenAI](https://openai.com/) 
@@ -49,4 +49,4 @@ def main(debug: bool = False):
 
 
 if __name__ == "__main__":
-    main(debug=True)
+    main(debug=False)

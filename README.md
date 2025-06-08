@@ -21,13 +21,13 @@ In this post I will expand upon this work and build out a [Retrivial Augmented G
 </center>
 
 
-## Using App Locally
+## Using The App Locally
 --------------------
 
 To run the application locally you can use [Docker](https://www.docker.com/) with the command,
 
 	docker-compose up
 
-     docker-compose up
+and then go to the site https://localhost:8080.
 
 
