@@ -50,8 +50,12 @@ def ask_question(
     generate_chain = create_stuff_documents_chain(llm=llm, prompt=prompt)
 
     rag_chain = create_retrieval_chain(
-        retriever=vectordb.as_retriever(k=k), combine_docs_chain=generate_chain
-    )
+                        retriever=vectordb.as_retriever(
+                                        k=k,
+                                        search_type="similarity_score_threshold",
+                                        search_kwargs={'score_threshold': 0.5}
+                                        ), combine_docs_chain=generate_chain
+                    )
 
     response = rag_chain.invoke({"input": question})
 

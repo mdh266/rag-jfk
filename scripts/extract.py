@@ -7,8 +7,11 @@ from google.oauth2 import service_account
 from google.cloud import storage
 from google.cloud.exceptions import Conflict
 import re
+import yaml
+
+
 ##################################################################
-# python extract.py  38.57s user 1.47s system 6% cpu 9:37.97 total
+# python scripts/extract.py  38.57s user 1.47s system 6% cpu 9:37.97 total
 ##################################################################
 
 
@@ -101,8 +104,14 @@ async def load(bucket, link: str) -> None:
 
 
 async def main():
+    with open('config.yml', 'r') as file:
+        config = yaml.safe_load(file)
+
+    bucket = config.get("bucket", "kennedyskis")
+    credentials_path = config.get("credentials_path", '../credentials.json')
+
     credentials = (service_account.Credentials
-                                  .from_service_account_file('credentials.json'))
+                                  .from_service_account_file(credentials_path))
 
     client = storage.Client(project=credentials.project_id,
                             credentials=credentials)
@@ -110,9 +119,9 @@ async def main():
     links = await get_links()
     
     try:
-        bucket = client.create_bucket("kennedyskis")
+        bucket = client.create_bucket(bucket)
     except Conflict:
-        bucket = client.get_bucket("kennedyskis")
+        bucket = client.get_bucket(bucket)
 
     files = []
     for link in links:

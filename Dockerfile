@@ -6,6 +6,7 @@ WORKDIR /work
 COPY app/ /work/app
 COPY pyproject.toml /work
 COPY entrypoint.sh /work
+COPY config.yml /work/
 RUN chmod +x /work/entrypoint.sh 
 RUN pip install . --no-cache 
 

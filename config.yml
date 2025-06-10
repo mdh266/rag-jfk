@@ -1,0 +1,5 @@
+index_name: jfk-speeches
+embedding_model: nvidia/llama-3.2-nv-embedqa-1b-v2
+dimension: 2048
+model: llama-3.3-70b-versatile
+temperature: 0.0

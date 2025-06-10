@@ -16,10 +16,15 @@ from google.oauth2 import service_account
 from pinecone import Pinecone
 from pinecone import ServerlessSpec
 
+
 # Load environment variables
 from dotenv import load_dotenv
 load_dotenv()
+import yaml
 
+#########################################################################
+# python scripts/load.py  149.48s user 6.55s system 22% cpu 11:25.25 total
+##########################################################################
 
 
 def metadata_func(record: Dict[str, str], metadata: Dict[str, str]) -> Dict[str, str]:
@@ -37,36 +42,6 @@ def load_json(file_path: str, jq_schema: str=".") -> JSONLoader:
                 text_content=False,
                 content_key="text",
                 metadata_func=metadata_func)
-
-
-# async def load_documents(
-#         loader: GCSDirectoryLoader,
-#         text_splitter: RecursiveCharacterTextSplitter
-# ) -> List[Document]:
-#     documents = loader.alazy_load()
-#     return await text_splitter.atransform_documents([document async for document in documents])
-
-# async def insert_documents(
-#         dimension: int,
-#         model: str,
-#         index_name: str,
-#         documents: List[Document]
-# ) -> None:
-    
-#     embedding = NVIDIAEmbeddings(
-#                             model=model,
-#                             api_key=os.getenv("NVIDIA_API_KEY"),
-#                             dimension=dimension,
-#                             truncate="NONE",
-#                             )
-
-#     vectordb = PineconeVectorStore(
-#                 pinecone_api_key=os.getenv("PINECONE_API_KEY"),
-#                 embedding=embedding,
-#                 index_name=index_name
-#     )
-
-#     await vectordb.aadd_documents(documents=documents)
 
 
 async def load_documents(
@@ -147,14 +122,17 @@ def create_pinecone_index(
     )
 
 if __name__ == "__main__":
-    # 149.48s user 6.55s system 22% cpu 11:25.25 total
-    bucket = "kennedyskis"
-    index_name = "jfk-speeches"
-    dimension = 2048
-    model = "nvidia/llama-3.2-nv-embedqa-1b-v2"
+    with open('config.yml', 'r') as file:
+        config = yaml.safe_load(file)
 
-    credentials = service_account.Credentials.from_service_account_file('../credentials.json')
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "../credentials.json"
+    bucket = config.get("bucket", "kennedyskis")
+    index_name = config.get("index_name", "jfk-speeches")
+    dimension = config.get("dimension", 2048)
+    model = config.get("model", "nvidia/llama-3.2-nv-embedqa-1b-v2")
+    credentials_path = config.get("credentials_path", '../credentials.json')
+
+    credentials = service_account.Credentials.from_service_account_file(credentials_path)
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentials_path
 
     create_pinecone_index(
         index_name=index_name,

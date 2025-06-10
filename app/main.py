@@ -17,7 +17,7 @@ with st.sidebar:
 
 
 
-def main(debug: bool = False) -> None:
+def main(config: Dict[str, Any], debug: bool = False) -> None:
     if debug:
         from dotenv import load_dotenv
         load_dotenv()
@@ -38,11 +38,11 @@ def main(debug: bool = False) -> None:
     # k = st.slider("Number of sources", 0, 10, 5)
 
     if st.button("Submit"):
-        index_name = "jfk-speeches"
-        embedding_model = "nvidia/llama-3.2-nv-embedqa-1b-v2"
-        dimension = 2048
-        model = "llama-3.3-70b-versatile"
-        tempeature = 0.0
+        index_name = config.get("index_name", "jfk-speeches")
+        embedding_model = config.get("embedding_model", "nvidia/llama-3.2-nv-embedqa-1b-v2")
+        dimension = config.get("dimension", 2048)
+        model = config.get("model", "llama-3.3-70b-versatile")
+        temperature = config.get("temperature", 0.0)
 
         with st.spinner("Ask not...", show_time=True):
             response = ask_question(question=question, 
@@ -50,7 +50,7 @@ def main(debug: bool = False) -> None:
                                     embedding_model=embedding_model,
                                     dimension=dimension,
                                     model=model,
-                                    temperature=tempeature)
+                                    temperature=temperature)
 
         st.markdown("#### Answer:")
         st.markdown(f"{response['answer']}")
@@ -70,7 +70,7 @@ def main(debug: bool = False) -> None:
 
 
 if __name__ == "__main__":
-    # with open('config.yml', 'r') as file:
-    #     config = yaml.safe_load(file)
+    with open('config.yml', 'r') as file:
+        config = yaml.safe_load(file)
 
-    main(debug=False)
+    main(config=config, debug=False)
