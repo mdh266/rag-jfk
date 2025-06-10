@@ -56,7 +56,7 @@ async def load_documents(
                             model=model,
                             api_key=os.getenv("NVIDIA_API_KEY"),
                             dimension=dimension,
-                            truncate="NONE",
+                            truncate="NONE"
                             )
 
     vectordb = PineconeVectorStore(
