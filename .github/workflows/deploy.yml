@@ -4,7 +4,7 @@ env:
   SERVICE_NAME: rag-jfk
   DOCKER_IMAGE: mdh266/rag-jfk
   REGION: us-central1
-  TAG: latest
+  TAG: cloudrun
 
 
 on:
@@ -57,4 +57,4 @@ jobs:
             --image=${{ env.DOCKER_IMAGE }}:${{ env.TAG }} \
             --region=${{ env.REGION }} \
             --project=${{ env.GCP_PROJECT }} \
-            --set-env-vars=GOOGLE_API_KEY=${{ secrets.OPENAI_API_KEY }},PINECONE_API_KEY=${{ secrets.PINECONE_API_KEY }}
+            --set-env-vars=GROQ_API_KEY=${{ secrets.GROQ_API_KEY }},PINECONE_API_KEY=${{ secrets.PINECONE_API_KEY }},NVIDIA_API_KEY=${{ secrets.NVIDIA_API_KEY }}
